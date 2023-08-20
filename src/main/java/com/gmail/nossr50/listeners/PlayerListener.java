@@ -866,7 +866,7 @@ public class PlayerListener implements Listener {
                             // Bukkit.getPluginManager().callEvent(fakeSwing);
                             player.getInventory().getItemInMainHand().setAmount(heldItem.getAmount() - 1);
                             player.updateInventory();
-                            if (herbalismManager.processGreenThumbBlocks(blockState) && EventUtils.simulateBlockBreak(block, player, false)) {
+                            if (herbalismManager.processGreenThumbBlocks(blockState) && EventUtils.simulateBlockBreak(block, player)) {
                                 blockState.update(true);
                             }
                         }
@@ -877,7 +877,7 @@ public class PlayerListener implements Listener {
                             // Bukkit.getPluginManager().callEvent(fakeSwing);
                             event.setCancelled(true);
                             if (herbalismManager.processShroomThumb(blockState)
-                                    && EventUtils.simulateBlockBreak(block, player, false)) {
+                                    && EventUtils.simulateBlockBreak(block, player)) {
                                 blockState.update(true);
                             }
                         }
@@ -958,8 +958,8 @@ public class PlayerListener implements Listener {
         McMMOPlayer mcMMOPlayer = UserManager.getOfflinePlayer(player);
 
         if (mcMMOPlayer == null) {
-            mcMMO.p.debug(player.getName() + "is chatting, but is currently not logged in to the server.");
-            mcMMO.p.debug("Party & Admin chat will not work properly for this player.");
+            LogUtils.debug(mcMMO.p.getLogger(), player.getName() + "is chatting, but is currently not logged in to the server.");
+            LogUtils.debug(mcMMO.p.getLogger(), "Party & Admin chat will not work properly for this player.");
             return;
         }
 

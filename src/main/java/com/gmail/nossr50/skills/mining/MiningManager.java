@@ -111,7 +111,7 @@ public class MiningManager extends SkillManager {
         Block targetBlock = player.getTargetBlock(BlockUtils.getTransparentBlocks(), BlastMining.MAXIMUM_REMOTE_DETONATION_DISTANCE);
 
         //Blast mining cooldown check needs to be first so the player can be messaged
-        if (!blastMiningCooldownOver() || targetBlock.getType() != Material.TNT || !EventUtils.simulateBlockBreak(targetBlock, player, true)) {
+        if (!blastMiningCooldownOver() || targetBlock.getType() != Material.TNT || !EventUtils.simulateBlockBreak(targetBlock, player)) {
             return;
         }
 
@@ -275,7 +275,7 @@ public class MiningManager extends SkillManager {
      * @return the Blast Mining tier
      */
     public int getDropMultiplier() {
-        if (mcMMO.p.getAdvancedConfig().isBlastMiningBonusDropsEnabled()) {
+        if (!mcMMO.p.getAdvancedConfig().isBlastMiningBonusDropsEnabled()) {
             return 0;
         }
 
